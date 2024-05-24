@@ -1,0 +1,25 @@
+version: '3'
+services:
+  frontend:
+    image: book_store_frontend
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - book_store_network
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:5555
+
+  backend:
+    image: book_store_backend
+    build:
+      context: ./backend
+    ports:
+      - "5555:5555"
+    networks:
+      - book_store_network
+
+networks:
+  book_store_network:
+    driver: bridge
